@@ -24,7 +24,7 @@ UI.readyBtn.addEventListener('click', () => {
     Network.updateReadyStatus((<Actor>Engine.actors[0]).name);
 });
 
-Network.connect(`${HOST}:${PORT}`, (data: NetworkCallback) => {
+Network.connect(`https://tds-serv.herokuapp.com`, (data: NetworkCallback) => {
     switch (data.event) {
         case 'onConnection': {
             UI.fillRooms(data.payload);
