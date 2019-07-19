@@ -135,7 +135,7 @@ Network.connect(`${HOST}:${PORT}`, (data: NetworkCallback) => {
                 )
             );
             Sound.shot.play();
-            
+
             break;
         }
     }
@@ -152,9 +152,9 @@ function init({ socketId, name }: PlayerInfo, positionIndex: number, color: stri
     );
 
     Engine.addActor(player);
-    
+
     Engine.update = (dtime: number, ctx: CanvasRenderingContext2D) => {
-        
+
         if (Engine.gameplay.beginPlay) {
             if (Engine.actors[0].shouldExist) {
                 // movement
@@ -181,14 +181,14 @@ function init({ socketId, name }: PlayerInfo, positionIndex: number, color: stri
                 });
                 Sound.playDead();
             }
-            
+
             // if projectile overlaps players
             for (let i = 0; i < Engine.actors.length; i++) {
                 if (Engine.actors[i] instanceof Projectile) {
                     for (let j = 0; j < Engine.actors.length; j++) {
                         if (Engine.actors[j] instanceof Actor) {
                             if (Engine.actors[i].projectileOwnerId === Engine.actors[j].id) continue;
-    
+
                             let aX1 = Engine.actors[i].position.x;
                             let aX2 = Engine.actors[i].position.x + Engine.actors[i].size.width;
                             let aY1 = Engine.actors[i].position.y;
@@ -197,13 +197,13 @@ function init({ socketId, name }: PlayerInfo, positionIndex: number, color: stri
                             let bX2 = Engine.actors[j].position.x + Engine.actors[j].size.width;
                             let bY1 = Engine.actors[j].position.y;
                             let bY2 = Engine.actors[j].position.y + Engine.actors[j].size.height;
-    
+
                             if (aX1 < bX2 && aX2 > bX1 && aY1 < bY2 && aY2 > bY1) {
                                 (<Actor>Engine.actors[j]).registerHit((<Projectile>Engine.actors[i]).damage);
                                 if ((<Actor>Engine.actors[j]).hp < 1) {
                                     (<Actor>Engine.actors[j]).shouldExist = false;
                                     (<Actor>Engine.actors[j]).size = { width: 0, height: 0 };
-                                    
+
                                     for (let k = 0; k < Engine.actors.length; k++) {
                                         if (Engine.actors[k].id === Engine.actors[i].projectileOwnerId) {
                                             Engine.gameplay.addScore((<Actor>Engine.actors[k]).name);
@@ -213,14 +213,14 @@ function init({ socketId, name }: PlayerInfo, positionIndex: number, color: stri
                                 }
                                 Engine.removeActor(Engine.actors[i].id);
                                 Sound.impact.play();
-    
+
                                 break;
                             }
                         }
                     }
                 }
             }
-        
+
             if (Engine.actors[0].shouldExist) {
                 // shooting
                 Engine.controls.onClick((x: number, y: number, shouldWait: boolean) => {
@@ -232,17 +232,17 @@ function init({ socketId, name }: PlayerInfo, positionIndex: number, color: stri
                             return;
                         }
                         Sound.shot.play();
-    
+
                         Engine.addActor(
                             new Projectile(
-                                { x: (<Actor>Engine.actors[0]).position.x + (<Actor>Engine.actors[0]).size.width / 2, y: (<Actor>Engine.actors[0]).position.y + (<Actor>Engine.actors[0]).size.height / 2  },
+                                { x: (<Actor>Engine.actors[0]).position.x + (<Actor>Engine.actors[0]).size.width / 2, y: (<Actor>Engine.actors[0]).position.y + (<Actor>Engine.actors[0]).size.height / 2 },
                                 { width: 10, height: 10 },
                                 { x, y },
                                 new Sprite('./assets/ammo.svg'),
                                 (<Actor>Engine.actors[0]).id
                             )
                         );
-    
+
                         Network.sendSpawn({
                             socketId: (<Actor>Engine.actors[0]).id,
                             position: {
@@ -251,7 +251,7 @@ function init({ socketId, name }: PlayerInfo, positionIndex: number, color: stri
                             },
                             mouseCoords: { x, y }
                         });
-    
+
                         (<Actor>Engine.actors[0]).depleteAmmo();
                     }
                 });

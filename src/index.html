@@ -1,22 +1,28 @@
 <html>
+
 <head>
     <style>
         * {
             font-family: Arial;
         }
+
         body {
             margin: 0;
         }
+
         h1 {
             color: #fff;
         }
-        #main-screen, #waiting-room {
+
+        #main-screen,
+        #waiting-room {
             position: fixed;
             width: 100vw;
             height: 100vh;
             background-color: #303030;
             padding: 30px 50px;
         }
+
         #waiting-room li {
             width: 300px;
             display: flex;
@@ -25,33 +31,42 @@
             color: #fff;
             border-bottom: 1px solid burlywood;
         }
+
         ul {
             list-style: none;
             padding: 0;
         }
-        #rooms > li {
+
+        #rooms>li {
             color: #fff;
             cursor: pointer;
         }
-        #rooms > li:hover {
+
+        #rooms>li:hover {
             color: red;
         }
+
         #createLobbyBtn {
             display: block;
             margin: 20px 0;
         }
+
         .hidden {
-            display: none!important;
+            display: none !important;
         }
+
         label {
             color: #fff;
         }
+
         .green {
-            color: green!important;
+            color: green !important;
         }
+
         .red {
-            color: red!important;
+            color: red !important;
         }
+
         #scoreboard {
             border: 1px solid burlywood;
             padding: 50px 30px;
@@ -61,7 +76,8 @@
             transform: translateX(-50%);
             background: #303030;
         }
-        #scoreboard > li {
+
+        #scoreboard>li {
             display: flex;
             justify-content: space-between;
             width: 200px;
@@ -71,6 +87,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="main-screen">
         <select name="color" id="color">
@@ -103,4 +120,5 @@
 
     <script src="/main.bundle.js"></script>
 </body>
+
 </html>

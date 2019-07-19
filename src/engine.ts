@@ -73,7 +73,7 @@ export default class Engine {
         if (this.update) {
             this.update(dtime, this.ctx);
         }
-        
+
         // first round hardcode
         if (
             !this.gameplay.isRestarting
