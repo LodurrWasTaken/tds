@@ -4,7 +4,7 @@ export default class Sound {
     static impact = new Audio('./assets/sound/shot_impact.mp3');
     static empty = new Audio('./assets/sound/empty.mp3');
     static dead = new Audio('./assets/sound/dead.mp3');
-    
+
     static played = false;
 
     static playDead(): void {

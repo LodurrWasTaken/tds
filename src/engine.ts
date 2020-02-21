@@ -30,7 +30,7 @@ export default class Engine {
             { x: 40, y: 40 },
             { x: this.canvas.width - 100, y: 40 },
             { x: this.canvas.width - 100, y: this.canvas.height - 100 },
-            { x: 40, y: this.canvas.height - 100 }
+            { x: 40, y: this.canvas.height - 100 },
         ];
 
         this.controls = new Controls();
@@ -51,7 +51,8 @@ export default class Engine {
             if (actor instanceof Projectile) {
                 // check borders
                 // destroy projectile if out of boundaries
-                if (actor.position.x + actor.size.width > this.canvas.width ||
+                if (
+                    actor.position.x + actor.size.width > this.canvas.width ||
                     actor.position.x < 0 ||
                     actor.position.y + actor.size.height > this.canvas.height ||
                     actor.position.y < 0
@@ -63,7 +64,9 @@ export default class Engine {
                 }
             }
             if (actor instanceof Actor) {
-                !actor.shouldExist ? this.gameplay.removePlayersAlive(actor.name) : this.gameplay.addPlayersAlive(actor.name);
+                !actor.shouldExist
+                    ? this.gameplay.removePlayersAlive(actor.name)
+                    : this.gameplay.addPlayersAlive(actor.name);
             }
             if (actor.shouldExist) {
                 actor.draw(this.ctx, dtime, this.controls.mouseCoords);
@@ -76,9 +79,9 @@ export default class Engine {
 
         // first round hardcode
         if (
-            !this.gameplay.isRestarting
-            && !this.gameplay.beginPlay
-            && this.gameplay.getPlayersAliveLength() > 1
+            !this.gameplay.isRestarting &&
+            !this.gameplay.beginPlay &&
+            this.gameplay.getPlayersAliveLength() > 1
         ) {
             if (this.gameplay.isReady()) {
                 this.gameplay.isRestarting = true;

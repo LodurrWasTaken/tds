@@ -23,10 +23,15 @@ export default class UI {
         });
     }
 
-    static fillWaitingRoom(players: {[key: string]: number}): void {
+    static fillWaitingRoom(players: { [key: string]: number }): void {
         this.playersList.innerHTML = '';
         for (let key in players) {
-            this.playersList.insertAdjacentHTML('beforeend', `<li>${key}<span class="${players[key] ? 'green' : 'red'}">${players[key] ? 'READY' : 'NOT READY'}</span></li>`);
+            this.playersList.insertAdjacentHTML(
+                'beforeend',
+                `<li>${key}<span class="${players[key] ? 'green' : 'red'}">${
+                    players[key] ? 'READY' : 'NOT READY'
+                }</span></li>`,
+            );
         }
     }
 
@@ -38,23 +43,26 @@ export default class UI {
         this.waitingRoom.classList.add('hidden');
     }
 
-    static drawEndScreen(ctx: CanvasRenderingContext2D, position: Position): void {
+    static drawEndScreen(
+        ctx: CanvasRenderingContext2D,
+        position: Position,
+    ): void {
         ctx.save();
         ctx.font = 'bold 36px Arial';
         ctx.fillStyle = 'red';
-        ctx.fillText('YOU DIED', position.x , position.y);
+        ctx.fillText('YOU DIED', position.x, position.y);
         ctx.restore();
     }
 
-    static drawAmmo(ctx: CanvasRenderingContext2D, text: string, position: Position): void {
+    static drawAmmo(
+        ctx: CanvasRenderingContext2D,
+        text: string,
+        position: Position,
+    ): void {
         ctx.save();
         ctx.font = 'bold 20px Arial';
         ctx.fillStyle = 'red';
-        ctx.fillText(
-            text,
-            position.x,
-            position.y
-        );
+        ctx.fillText(text, position.x, position.y);
         ctx.restore();
     }
 
@@ -62,27 +70,30 @@ export default class UI {
         return (<HTMLInputElement>this.nameInput).value;
     }
 
-    static drawRound(ctx: CanvasRenderingContext2D, round: number, position: Position): void {
+    static drawRound(
+        ctx: CanvasRenderingContext2D,
+        round: number,
+        position: Position,
+    ): void {
         ctx.save();
         ctx.font = 'bold 36px Arial';
         ctx.fillStyle = 'red';
-        ctx.fillText(
-            `ROUND ${round}`,
-            position.x,
-            position.y
-        );
+        ctx.fillText(`ROUND ${round}`, position.x, position.y);
         ctx.restore();
     }
 
-    static showScoreboard(scores: { [key: string]: number }, mainPlayer: string): void {
+    static showScoreboard(
+        scores: { [key: string]: number },
+        mainPlayer: string,
+    ): void {
         if (this.scoreboard.classList.contains('hidden')) {
             this.scoreboard.classList.remove('hidden');
             let content = '';
             for (let playerName in scores) {
                 if (playerName !== mainPlayer) {
-                    content += `<li><span>${playerName}</span><span>${scores[playerName]}</span></li>`
+                    content += `<li><span>${playerName}</span><span>${scores[playerName]}</span></li>`;
                 } else {
-                    content += `<li class="red"><span>${playerName}</span><span>${scores[playerName]}</span></li>`
+                    content += `<li class="red"><span>${playerName}</span><span>${scores[playerName]}</span></li>`;
                 }
             }
             this.scoreboard.innerHTML = content;

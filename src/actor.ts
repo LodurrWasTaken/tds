@@ -17,7 +17,7 @@ export default class Actor extends BaseActor {
         sprite: Sprite,
         id: string,
         name: string,
-        playable: boolean = false
+        playable: boolean = false,
     ) {
         super(position, size, sprite, id, playable);
 
@@ -25,13 +25,17 @@ export default class Actor extends BaseActor {
         this.hp = 100;
         this.ammo = {
             loaded: 1,
-            remaining: 30
-        }
+            remaining: 30,
+        };
         this.reloadDelay = 1000;
         this.name = name;
     }
 
-    draw(ctx: CanvasRenderingContext2D, dtime?: number, mouseCoords?: Position): void {
+    draw(
+        ctx: CanvasRenderingContext2D,
+        dtime?: number,
+        mouseCoords?: Position,
+    ): void {
         ctx.save();
         // draw name
         ctx.font = 'bold 12px Arial';
@@ -40,7 +44,7 @@ export default class Actor extends BaseActor {
             this.name,
             this.position.x,
             this.position.y - this.size.height / 2,
-            100
+            100,
         );
 
         // draw healthbar
@@ -49,23 +53,24 @@ export default class Actor extends BaseActor {
             this.position.x + this.size.width / 2 - 25,
             this.position.y - this.size.height / 2.8,
             this.hp / 2,
-            5
+            5,
         );
         ctx.strokeRect(
             this.position.x + this.size.width / 2 - 25 - 2,
             this.position.y - this.size.height / 2.8 - 1,
             52,
-            7
+            7,
         );
 
         this.sprite.rotateDraw(ctx, mouseCoords);
-        
+
         ctx.restore();
     }
 
     private move(x: number, y: number): void {
         // check borders
-        if (this.position.x + x + this.size.width > window.innerWidth ||
+        if (
+            this.position.x + x + this.size.width > window.innerWidth ||
             this.position.x + x < 0 ||
             this.position.y + y + this.size.height > window.innerHeight ||
             this.position.y + y < 0
@@ -105,8 +110,8 @@ export default class Actor extends BaseActor {
             setTimeout(() => {
                 this.ammo = {
                     loaded: 1,
-                    remaining: --this.ammo.remaining
-                }
+                    remaining: --this.ammo.remaining,
+                };
                 this.isReloading = false;
             }, this.reloadDelay);
         }
@@ -117,11 +122,11 @@ export default class Actor extends BaseActor {
         this.shouldExist = true;
         this.ammo = {
             loaded: 1,
-            remaining: 30
-        }
+            remaining: 30,
+        };
         this.size = {
             width: 60,
-            height: 60
-        }
+            height: 60,
+        };
     }
 }

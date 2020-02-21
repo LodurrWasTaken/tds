@@ -23,7 +23,14 @@ export abstract class BaseActor {
     public projectileOwnerId: string;
     public shouldExist: boolean;
 
-    constructor(position: Position, size: Size, sprite: Sprite, id: string, playable: boolean, projectileOwnerId?: string) {
+    constructor(
+        position: Position,
+        size: Size,
+        sprite: Sprite,
+        id: string,
+        playable: boolean,
+        projectileOwnerId?: string,
+    ) {
         this.position = position;
         this.size = size;
         this.id = id;
@@ -34,7 +41,11 @@ export abstract class BaseActor {
         this.shouldExist = true;
     }
 
-    abstract draw(ctx: CanvasRenderingContext2D, deltaTime: number, mouseCoords?: Position): void;
+    abstract draw(
+        ctx: CanvasRenderingContext2D,
+        deltaTime: number,
+        mouseCoords?: Position,
+    ): void;
 }
 
 export interface NetworkCallback {
@@ -63,10 +74,10 @@ export interface Ammo {
 export interface PlayerInfo {
     socketId: string;
     name: string;
-    ready: boolean; 
+    ready: boolean;
 }
 
 export interface LobbyInfo {
-    playerInfo: PlayerInfo,
-    players: PlayerInfo[]
+    playerInfo: PlayerInfo;
+    players: PlayerInfo[];
 }

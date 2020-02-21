@@ -9,61 +9,61 @@ export default class Network {
         this.client.on('connect', () => {
             cb({
                 event: 'connect',
-                payload: this.client.id
+                payload: this.client.id,
             });
         });
         this.client.on('createLobby', (playerInfo: PlayerInfo) => {
             cb({
                 event: 'createLobby',
-                payload: playerInfo
+                payload: playerInfo,
             });
         });
         this.client.on('newPlayer', (player: PlayerInfo) => {
             cb({
                 event: 'newPlayer',
-                payload: player
+                payload: player,
             });
         });
         this.client.on('newLobby', (lobbyId: string) => {
             cb({
                 event: 'newLobby',
-                payload: [lobbyId]
+                payload: [lobbyId],
             });
         });
         this.client.on('joinLobby', (payload: LobbyInfo) => {
             cb({
                 event: 'joinLobby',
-                payload
+                payload,
             });
         });
         this.client.on('onConnection', (rooms: string[]) => {
             cb({
                 event: 'onConnection',
-                payload: rooms
+                payload: rooms,
             });
         });
         this.client.on('onDisconnect', (socketId: string) => {
             cb({
                 event: 'onDisconnect',
-                payload: socketId
+                payload: socketId,
             });
         });
         this.client.on('actorUpdate', (payload: ActorUpdate) => {
             cb({
                 event: 'actorUpdate',
-                payload
+                payload,
             });
         });
         this.client.on('projectileSpawn', (payload: ProjectileSpawn) => {
             cb({
                 event: 'projectileSpawn',
-                payload
+                payload,
             });
         });
         this.client.on('playerReady', (playerName: string) => {
             cb({
                 event: 'playerReady',
-                payload: playerName
+                payload: playerName,
             });
         });
     }

@@ -34,13 +34,16 @@ export default class Gameplay {
 
     public isReady(): boolean {
         let values = Object.values(this.playersReady);
-        let sum = values.reduce((acc: number, val: number) => acc + val, 0)
-        
+        let sum = values.reduce((acc: number, val: number) => acc + val, 0);
+
         return sum === values.length;
     }
 
     public getPlayersAliveLength(): number {
-        return Object.values(this.playersAlive).reduce((count: number, isAlive: boolean) => isAlive ? ++count : count, 0);
+        return Object.values(this.playersAlive).reduce(
+            (count: number, isAlive: boolean) => (isAlive ? ++count : count),
+            0,
+        );
     }
 
     public getPlayersLength(): number {

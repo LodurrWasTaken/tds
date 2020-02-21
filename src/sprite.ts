@@ -12,16 +12,22 @@ export default class Sprite {
         this.amplitude = amplitude;
     }
 
-    public rotateDraw(ctx: CanvasRenderingContext2D, mouseCoords: Position, amplitude?: number): void {
+    public rotateDraw(
+        ctx: CanvasRenderingContext2D,
+        mouseCoords: Position,
+        amplitude?: number,
+    ): void {
         ctx.translate(
             this.parent.position.x + this.parent.size.width / 2,
-            this.parent.position.y + this.parent.size.height / 2
+            this.parent.position.y + this.parent.size.height / 2,
         );
 
         if (this.parent.playable || this.parent instanceof Projectile) {
             this.amplitude = Math.atan2(
-                mouseCoords.y - (this.parent.position.y + this.parent.size.height / 2),
-                mouseCoords.x - (this.parent.position.x + this.parent.size.width / 2)
+                mouseCoords.y -
+                    (this.parent.position.y + this.parent.size.height / 2),
+                mouseCoords.x -
+                    (this.parent.position.x + this.parent.size.width / 2),
             );
         }
 
@@ -31,7 +37,7 @@ export default class Sprite {
             -(this.parent.size.width / 2),
             -(this.parent.size.height / 2),
             this.parent.size.width,
-            this.parent.size.height
+            this.parent.size.height,
         );
     }
 

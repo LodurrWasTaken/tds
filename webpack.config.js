@@ -1,70 +1,69 @@
-const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const ROOT = path.resolve( __dirname, 'src' );
-const DESTINATION = path.resolve( __dirname, 'dist' );
+const ROOT = path.resolve(__dirname, "src");
+const DESTINATION = path.resolve(__dirname, "dist");
 
 module.exports = (env, argv) => ({
-    context: ROOT,
+  context: ROOT,
 
-    entry: {
-        'main': './main.ts'
-    },
-    
-    output: {
-        filename: '[name].bundle.js',
-        path: DESTINATION
-    },
+  entry: {
+    main: "./main.ts"
+  },
 
-    resolve: {
-        extensions: ['.ts', '.js'],
-        modules: [
-            ROOT,
-            'node_modules'
-        ]
-    },
+  output: {
+    filename: "[name].bundle.js",
+    path: DESTINATION
+  },
 
-    module: {
-        rules: [
-            /****************
-            * PRE-LOADERS
-            *****************/
-            {
-                enforce: 'pre',
-                test: /\.js$/,
-                use: 'source-map-loader'
-            },
-            {
-                enforce: 'pre',
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: 'tslint-loader'
-            },
+  resolve: {
+    extensions: [".ts", ".js"],
+    modules: [ROOT, "node_modules"]
+  },
 
-            /****************
-            * LOADERS
-            *****************/
-            {
-                test: /\.ts$/,
-                exclude: [ /node_modules/ ],
-                use: 'awesome-typescript-loader'
-            }
-        ]
-    },
+  module: {
+    rules: [
+      /****************
+       * PRE-LOADERS
+       *****************/
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        use: "source-map-loader"
+      },
+      {
+        enforce: "pre",
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: "tslint-loader"
+      },
 
-    plugins: [
-        new CopyWebpackPlugin([
-            { from: path.join(ROOT, 'index.html'), to: DESTINATION },
-            { from: path.join(ROOT, 'assets'), to: path.join(DESTINATION, 'assets') }
-        ]),
-        new webpack.EnvironmentPlugin({
-            HOST: argv.mode === 'production' ? 'http://95.216.169.56' : 'http://localhost',
-            PORT: 9009
-        })
-    ],
+      /****************
+       * LOADERS
+       *****************/
+      {
+        test: /\.ts$/,
+        exclude: [/node_modules/],
+        use: "awesome-typescript-loader"
+      }
+    ]
+  },
 
-    devtool: 'cheap-module-source-map',
-    devServer: {}
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: path.join(ROOT, "index.html"), to: DESTINATION },
+      { from: path.join(ROOT, "assets"), to: path.join(DESTINATION, "assets") }
+    ]),
+    new webpack.EnvironmentPlugin({
+      HOST:
+        argv.mode === "production"
+          ? "http://95.216.169.56"
+          : "http://localhost",
+      PORT: 9009
+    })
+  ],
+
+  devtool: "cheap-module-source-map",
+  devServer: {}
 });
-
